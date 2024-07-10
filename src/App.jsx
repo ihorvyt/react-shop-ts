@@ -3,7 +3,7 @@ import Header from "./Components/Header.jsx";
 import Categories from "./Components/Categories.jsx";
 import Sort from "./Components/Sort.jsx";
 import PhoneBlock from "./Components/PhoneBlock.jsx";
-
+import phones from "./assets/phones.json";
 
 function App() {
     return (
@@ -17,7 +17,18 @@ function App() {
                     </div>
                     <h2 className="content__title">Всі піци</h2>
                     <div className="content__items">
-                        <PhoneBlock title="Pixel" price={200}/>
+                        {
+                            phones.map((phone, index) => (
+                                <PhoneBlock
+                                    key={index}
+                                    title={phone.name}
+                                    image={phone.imageUrl}
+                                    price={phone.price}
+                                    sizes={phone.sizes}
+                                    types={phone.types}
+                                />
+                            ))
+                        }
                     </div>
                 </div>
             </div>

@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "imageUrl": "https://content.rozetka.com.ua/goods/images/big_tile/417138803.jpg",
+    "name": "iPhone 13",
+    "types": [0, 1],
+    "sizes": [128, 256, 512],
+    "price": 25000,
+    "category": 3,
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "imageUrl": "https://content1.rozetka.com.ua/goods/images/big_tile/364834187.jpg",
+    "name": "Samsung Galaxy S21",
+    "types": [1],
+    "sizes": [128, 256],
+    "price": 22000,
+    "category": 3,
+    "rating": 4
+  },
+  {
+    "id": 3,
+    "imageUrl": "https://content2.rozetka.com.ua/goods/images/big_tile/342529123.jpg",
+    "name": "Google Pixel 6",
+    "types": [0],
+    "sizes": [128, 256],
+    "price": 20000,
+    "category": 2,
+    "rating": 5
+  },
+  {
+    "id": 4,
+    "imageUrl": "https://content.rozetka.com.ua/goods/images/big_tile/342529124.jpg",
+    "name": "OnePlus 9",
+    "types": [0, 1],
+    "sizes": [128, 256],
+    "price": 19000,
+    "category": 2,
+    "rating": 4
+  },
+  {
+    "id": 5,
+    "imageUrl": "https://content1.rozetka.com.ua/goods/images/big_tile/364834251.jpg",
+    "name": "Xiaomi Mi 11",
+    "types": [0, 1],
+    "sizes": [128, 256],
+    "price": 18000,
+    "category": 1,
+    "rating": 4
+  },
+  {
+    "id": 6,
+    "imageUrl": "https://content.rozetka.com.ua/goods/images/big_tile/364827147.jpg",
+    "name": "Huawei P40",
+    "types": [0, 1],
+    "sizes": [128, 256],
+    "price": 17000,
+    "category": 2,
+    "rating": 4
+  },
+  {
+    "id": 7,
+    "imageUrl": "https://content.rozetka.com.ua/goods/images/big_tile/391002021.jpg",
+    "name": "Sony Xperia 5 II",
+    "types": [0],
+    "sizes": [128, 256],
+    "price": 21000,
+    "category": 3,
+    "rating": 4
+  },
+  {
+    "id": 8,
+    "imageUrl": "https://content.rozetka.com.ua/goods/images/big_tile/362252598.jpg",
+    "name": "Oppo Find X3 Pro",
+    "types": [0, 1],
+    "sizes": [128, 256],
+    "price": 23000,
+    "category": 3,
+    "rating": 5
+  },
+  {
+    "id": 9,
+    "imageUrl": "https://content1.rozetka.com.ua/goods/images/big_tile/396528096.jpg",
+    "name": "LG Wing",
+    "types": [0],
+    "sizes": [128, 256],
+    "price": 20000,
+    "category": 2,
+    "rating": 4
+  },
+  {
+    "id": 10,
+    "imageUrl": "https://content.rozetka.com.ua/goods_tags/images/original/431106386.png",
+    "name": "Motorola Edge",
+    "types": [0, 1],
+    "sizes": [128, 256],
+    "price": 16000,
+    "category": 1,
+    "rating": 4
+  }
+]
