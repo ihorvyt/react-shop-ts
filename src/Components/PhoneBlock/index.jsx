@@ -1,10 +1,14 @@
-function PhoneBlock({title, image, price, sizes, types}) {
+import React from "react";
+
+function Index({title, imageUrl, price, sizes, types}) {
     const typeNames = ["чорний", "білий"]
+    const [activeColorType, setActiveColorType] = React.useState(0)
+    const [activeSizeType, setActiveSizeType] = React.useState(sizes[0])
 
     return <div className="pizza-block">
         <img
             className="pizza-block__image"
-            src={image}
+            src={imageUrl}
             alt="Pizza"
         />
         <h4 className="pizza-block__title">{title}</h4>
@@ -12,7 +16,10 @@ function PhoneBlock({title, image, price, sizes, types}) {
             <ul>
                 {
                     types.map((type, index) => (
-                        <li key={index}>
+                        <li
+                            key={index}
+                            onClick={() => setActiveColorType(index)}
+                            className={`${activeColorType === type ? "active" : ""}`}>
                             {typeNames[type]}
                         </li>
                     ))
@@ -21,7 +28,12 @@ function PhoneBlock({title, image, price, sizes, types}) {
             <ul>
                 {
                     sizes.map(size => (
-                        <li key={size}>{size}</li>
+                        <li
+                            key={size}
+                            onClick={() => setActiveSizeType(size)}
+                            className={`${activeSizeType === size ? "active" : ""}`}>
+                            {size}
+                        </li>
                     ))
                 }
             </ul>
@@ -48,4 +60,4 @@ function PhoneBlock({title, image, price, sizes, types}) {
     </div>;
 }
 
-export default PhoneBlock
+export default Index

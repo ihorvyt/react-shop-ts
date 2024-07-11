@@ -1,9 +1,9 @@
 import './scss/app.scss'
 import Header from "./Components/Header.jsx";
-import Categories from "./Components/Categories.jsx";
-import Sort from "./Components/Sort.jsx";
-import PhoneBlock from "./Components/PhoneBlock.jsx";
-import phones from "./assets/phones.json";
+import React from "react";
+import Home from "./Pages/Home.jsx";
+import Cart from "./Pages/Cart.jsx";
+import {Route, Routes} from "react-router-dom";
 
 function App() {
     return (
@@ -11,25 +11,11 @@ function App() {
             <Header/>
             <div className="content">
                 <div className="container">
-                    <div className="content__top">
-                        <Categories/>
-                        <Sort/>
-                    </div>
-                    <h2 className="content__title">Всі піци</h2>
-                    <div className="content__items">
-                        {
-                            phones.map((phone, index) => (
-                                <PhoneBlock
-                                    key={index}
-                                    title={phone.name}
-                                    image={phone.imageUrl}
-                                    price={phone.price}
-                                    sizes={phone.sizes}
-                                    types={phone.types}
-                                />
-                            ))
-                        }
-                    </div>
+                    <Routes>
+                        <Route path="/" element={<Home />}/>
+                        <Route path="/cart" element={<Cart/>}/>
+                        <Route path="*" element={<Cart/>}/>
+                    </Routes>
                 </div>
             </div>
         </div>

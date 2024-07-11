@@ -1,6 +1,13 @@
-function Sort() {
+import React from "react";
+
+function Sort({value, onChange})  {
+    const [open, setOpen] = React.useState(false);
+    const sortMethods = [{name: "популярності", sort: "rating"}, {name: "ціні", sort: "price"}, {name: "алфавіту", sort: "title"}]
+
     return <div className="sort">
-        <div className="sort__label">
+        <div className="sort__label"
+            onClick={() => setOpen(!open)}
+        >
             <svg
                 width="10"
                 height="6"
@@ -14,15 +21,27 @@ function Sort() {
                 />
             </svg>
             <b>Сортування по:</b>
-            <span>популярності</span>
+            <span>{value.name}</span>
         </div>
-        <div className="sort__popup">
-            <ul>
-                <li className="active">популярності</li>
-                <li>ціні</li>
-                <li>алфавіту</li>
-            </ul>
-        </div>
+        {
+            open && <div className="sort__popup">
+                <ul>
+                    {
+                        sortMethods.map((sortMethod, index) => (
+                            <li
+                                key={index}
+                                onClick={() => {
+                                    onChange(sortMethod)
+                                    setOpen(false)
+                                }}
+                                className={value === sortMethod.name ? 'active' : ''}>
+                                {sortMethod.name}
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        }
     </div>;
 }
 
