@@ -1,14 +1,16 @@
 import './scss/app.scss'
 import Header from "./Components/Header.jsx";
-import React from "react";
 import Home from "./Pages/Home.jsx";
 import Cart from "./Pages/Cart.jsx";
 import {Route, Routes} from "react-router-dom";
+import {useState} from "react";
 
 function App() {
+    const [searchValue, setSearchValue] = useState("");
+
     return (
         <div className="wrapper">
-            <Header/>
+            <Header value={searchValue} onChange={setSearchValue} />
             <div className="content">
                 <div className="container">
                     <Routes>

@@ -13,7 +13,7 @@ export default function Home() {
 
     React.useEffect(() => {
         setIsLoading(true)
-        fetch(`https://668fde68c0a7969efd99e538.mockapi.io/phones?${categoryId > 0 ? 'category=' + categoryId : ''}sortBy=${sortMethod.sort}&order=desc`)
+        fetch(`https://668fde68c0a7969efd99e538.mockapi.io/phones?${categoryId > 0 ? 'category=' + categoryId : ''}&sortBy=${sortMethod.sort}&order=desc`)
             .then(res => res.json())
             .then(json => {
                 setIsLoading(false)
