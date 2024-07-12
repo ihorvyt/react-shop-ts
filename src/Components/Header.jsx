@@ -1,7 +1,7 @@
 import SearchBar from './Search/';
 import {Link} from "react-router-dom";
 
-function Header({value, onChange}) {
+function Header({searchValue, onSearchValueChange}) {
     return <div className="header">
         <div className="container">
             <div className="header__logo">
@@ -11,7 +11,7 @@ function Header({value, onChange}) {
                     <p>найкращі телефони</p>
                 </div>
             </div>
-            <SearchBar value={value} onChange={onChange}/>
+            <SearchBar searchValue={searchValue} onSearchValueChange={onSearchValueChange}/>
             <div className="header__cart">
                 <Link to="/cart" className="button button--cart">
                     <span>520 $</span>

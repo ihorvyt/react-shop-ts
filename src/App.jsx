@@ -10,11 +10,11 @@ function App() {
 
     return (
         <div className="wrapper">
-            <Header value={searchValue} onChange={setSearchValue} />
+            <Header searchValue={searchValue} onSearchValueChange={setSearchValue} />
             <div className="content">
                 <div className="container">
                     <Routes>
-                        <Route path="/" element={<Home />}/>
+                        <Route path="/" element={<Home searchValue={searchValue} />}/>
                         <Route path="/cart" element={<Cart/>}/>
                         <Route path="*" element={<Cart/>}/>
                     </Routes>

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Index({title, imageUrl, price, sizes, types}) {
+function Index({name, imageUrl, price, sizes, types}) {
     const typeNames = ["чорний", "білий"]
     const [activeColorType, setActiveColorType] = React.useState(0)
     const [activeSizeType, setActiveSizeType] = React.useState(sizes[0])
@@ -11,7 +11,7 @@ function Index({title, imageUrl, price, sizes, types}) {
             src={imageUrl}
             alt="Pizza"
         />
-        <h4 className="pizza-block__title">{title}</h4>
+        <h4 className="pizza-block__title">{name}</h4>
         <div className="pizza-block__selector">
             <ul>
                 {
@@ -19,7 +19,7 @@ function Index({title, imageUrl, price, sizes, types}) {
                         <li
                             key={index}
                             onClick={() => setActiveColorType(index)}
-                            className={`${activeColorType === type ? "active" : ""}`}>
+                            className={`${activeColorType === index ? "active" : ""}`}>
                             {typeNames[type]}
                         </li>
                     ))
