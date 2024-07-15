@@ -1,8 +1,18 @@
 import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import { setSortMethod } from "../redux/slices/filterSlice.js";
 
-function Sort({value, onChange})  {
+export const sortMethods = [{name: "популярності", sort: "rating"}, {name: "ціні", sort: "price"}, {name: "алфавіту", sort: "title"}]
+
+function Sort()  {
+    const dispatch = useDispatch();
+    const sort = useSelector(state => state.filter.sort)
+
     const [open, setOpen] = React.useState(false);
-    const sortMethods = [{name: "популярності", sort: "rating"}, {name: "ціні", sort: "price"}, {name: "алфавіту", sort: "title"}]
+
+    const setSort = (sort) => {
+        dispatch(setSortMethod(sort))
+    }
 
     return <div className="sort">
         <div className="sort__label"
@@ -21,7 +31,7 @@ function Sort({value, onChange})  {
                 />
             </svg>
             <b>Сортування по:</b>
-            <span>{value.name}</span>
+            <span>{sort.name}</span>
         </div>
         {
             open && <div className="sort__popup">
@@ -31,10 +41,10 @@ function Sort({value, onChange})  {
                             <li
                                 key={index}
                                 onClick={() => {
-                                    onChange(sortMethod)
+                                    setSort(sortMethod)
                                     setOpen(false)
                                 }}
-                                className={value === sortMethod.name ? 'active' : ''}>
+                                className={sort === sortMethod.name ? 'active' : ''}>
                                 {sortMethod.name}
                             </li>
                         ))

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './Search.scss'
+import debounce from "lodash.debounce"
+import {SearchContext} from "../../App.jsx";
 
-function Index({searchValue, onSearchValueChange}) {
+function Search() {
+    const {searchValue, setSearchValue } = useContext(SearchContext)
+
     return (
         <input
             className="search-bar"
             type="Phone search"
             value={searchValue}
-            onChange={(e) => onSearchValueChange(e.target.value)}/>
+            onChange={(e) => setSearchValue(e.target.value)}/>
     )
 }
 
-export default Index;
+export default Search;
