@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { setSortMethod } from "../redux/slices/filterSlice.js";
 
@@ -7,6 +7,7 @@ export const sortMethods = [{name: "популярності", sort: "rating"}, 
 function Sort()  {
     const dispatch = useDispatch();
     const sort = useSelector(state => state.filter.sort)
+    const sortRef = useRef(null);
 
     const [open, setOpen] = React.useState(false);
 
@@ -14,7 +15,22 @@ function Sort()  {
         dispatch(setSortMethod(sort))
     }
 
-    return <div className="sort">
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sortRef.current && !sortRef.current.contains(event.target)) {
+                setOpen(false);
+            } else {
+            }
+        };
+
+        document.body.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.body.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+    return <div ref={sortRef} className="sort">
         <div className="sort__label"
             onClick={() => setOpen(!open)}
         >

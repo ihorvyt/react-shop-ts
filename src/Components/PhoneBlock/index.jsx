@@ -1,6 +1,6 @@
 import React from "react";
 
-function Index({name, imageUrl, price, sizes, types}) {
+function PizzaBlock({name, imageUrl, price, sizes, types}) {
     const typeNames = ["чорний", "білий"]
     const [activeColorType, setActiveColorType] = React.useState(0)
     const [activeSizeType, setActiveSizeType] = React.useState(sizes[0])
@@ -60,4 +60,4 @@ function Index({name, imageUrl, price, sizes, types}) {
     </div>;
 }
 
-export default Index
+export default PizzaBlock
