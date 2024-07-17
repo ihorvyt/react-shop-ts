@@ -5,15 +5,19 @@ import { useSelector } from "react-redux";
 function Header() {
     const { items, totalPrice } = useSelector(state => state.cart);
 
+    const totalCount = items.reduce((sum, item) => {
+        return sum + item.count;
+    }, 0)
+
     return <div className="header">
         <div className="container">
-            <div className="header__logo">
+            <Link to='/' className="header__logo">
                 <img width="38" src="/img/pizza-logo.svg" alt="Pizza logo"/>
                 <div>
                     <h1>React Phone</h1>
                     <p>найкращі телефони</p>
                 </div>
-            </div>
+            </Link>
             <SearchBar/>
             <div className="header__cart">
                 <Link to="/cart" className="button button--cart">
@@ -48,7 +52,7 @@ function Header() {
                             strokeLinejoin="round"
                         />
                     </svg>
-                    <span>{items.length}</span>
+                    <span>{totalCount}</span>
                 </Link>
             </div>
         </div>
