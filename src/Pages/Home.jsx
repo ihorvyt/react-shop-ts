@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import qs from "qs";
 import {useNavigate} from "react-router-dom";
 
@@ -10,9 +9,9 @@ import PhoneBlock from "../Components/PhoneBlock/index.jsx";
 import Pagination from "../Components/Pagination/index.jsx";
 
 import {useDispatch, useSelector} from "react-redux";
-import {SearchContext} from "../App.jsx";
-import {setCategoryId, setCurrentPage, setFilters} from "../redux/slices/filterSlice.js";
+import {selectFilter, setCategoryId, setCurrentPage, setFilters} from "../redux/slices/filterSlice.js";
 import {sortMethods} from "../Components/Sort.jsx";
+import {fetchPhones, selectPizzaData} from "../redux/slices/phonesSlice.js";
 
 export default function Home( ) {
     const dispatch = useDispatch();
@@ -20,7 +19,8 @@ export default function Home( ) {
     const isSearch = React.useRef(false);
     const isMounted = React.useRef(false);
 
-    const { categoryId, sort, currentPage } = useSelector(state => state.filter)
+    const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter)
+    const { items, status } = useSelector(selectPizzaData)
 
     const onClickCategory = (id) => {
         dispatch(setCategoryId(id))
@@ -29,21 +29,17 @@ export default function Home( ) {
         dispatch(setCurrentPage(page));
     }
 
-    const fetchPhones = () => {
+    const getPhones = async () => {
         const category = categoryId > 0 ? 'category=' + categoryId : '';
         const search = searchValue.length > 0 ? '&search=' + searchValue : '';
 
-        setIsLoading(true)
-        axios.get(`https://668fde68c0a7969efd99e538.mockapi.io/phones?page=${currentPage}&limit=4&${category}&sortBy=${sort.sort}&order=desc${search}`)
-            .then((res) => {
-                setPhones(res.data);
-                setIsLoading(false)
-            })
+        dispatch(fetchPhones({
+            currentPage,
+            category,
+            sort,
+            search
+        }));
     }
-
-    const {searchValue} = React.useContext(SearchContext)
-    const [phones, setPhones] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
 
     // if first render was done, check URL query and save it in redux
     React.useEffect(() => {
@@ -58,13 +54,12 @@ export default function Home( ) {
             )
             isSearch.current = true;
         }
-
     }, [])
 
     // fetch pizzas
     React.useEffect(() => {
         if (!isSearch.current) {
-            fetchPhones()
+            getPhones()
         }
         isSearch.current = false;
     }, [categoryId, sort, searchValue, currentPage]);
@@ -84,7 +79,7 @@ export default function Home( ) {
 
     },[categoryId, sort.sort, currentPage])
 
-    const items = phones.map(phone => (<PhoneBlock key={phone.id} {...phone}/>))
+    const phones = items.map(phone => (<PhoneBlock key={phone.id} {...phone}/>))
     const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i}/>)
 
     return (
@@ -99,7 +94,7 @@ export default function Home( ) {
             <h2 className="content__title">Всі піци</h2>
             <div className="content__items">
                 {
-                    isLoading ? skeletons : items
+                    status === 'loading' ? skeletons : phones
                 }
             </div>
             <Pagination value={currentPage} onChangePage={onChangePage} />

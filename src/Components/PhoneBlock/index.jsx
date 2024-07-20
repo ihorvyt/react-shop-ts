@@ -1,11 +1,11 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { addItem} from "../../redux/slices/cartSlice.js";
+import {addItem, selectCartItemById} from "../../redux/slices/cartSlice.js";
 
-function PizzaBlock({id, title, name, imageUrl, price, sizes, types}) {
+function PizzaBlock({id, name, imageUrl, price, sizes, types}) {
     const typeNames = ["чорний", "білий"]
     const dispatch = useDispatch()
-    const cartItem = useSelector((state) => state.cart.items.find((item) => item.id === id))
+    const cartItem = useSelector(selectCartItemById(id))
     const [activeColorType, setActiveColorType] = React.useState(0)
     const [activeSizeType, setActiveSizeType] = React.useState(sizes[0])
 
@@ -14,7 +14,7 @@ function PizzaBlock({id, title, name, imageUrl, price, sizes, types}) {
     const onClickAdd = () => {
         const item = {
             id,
-            title,
+            name,
             price,
             imageUrl,
             color: typeNames[activeColorType],

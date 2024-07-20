@@ -1,12 +1,12 @@
 import React, {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { setSortMethod } from "../redux/slices/filterSlice.js";
+import {selectSort, setSortMethod} from "../redux/slices/filterSlice.js";
 
 export const sortMethods = [{name: "популярності", sort: "rating"}, {name: "ціні", sort: "price"}, {name: "алфавіту", sort: "title"}]
 
 function Sort()  {
     const dispatch = useDispatch();
-    const sort = useSelector(state => state.filter.sort)
+    const sort = useSelector(selectSort)
     const sortRef = useRef(null);
 
     const [open, setOpen] = React.useState(false);
@@ -19,7 +19,6 @@ function Sort()  {
         const handleClickOutside = (event) => {
             if (sortRef.current && !sortRef.current.contains(event.target)) {
                 setOpen(false);
-            } else {
             }
         };
 

@@ -2,15 +2,22 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import CartItem from "../Components/CartItem/CartItem.jsx";
+import {clearItems, selectCart} from "../redux/slices/cartSlice.js";
 
 function Cart() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const cartItems = useSelector((state) => state.cart.items)
+    const {totalPrice, items} = useSelector(selectCart)
 
+    const onClickClear = () => {
+        dispatch(clearItems());
+    }
 
-    console.log(cartItems)
+    const totalCount = items.reduce((sum, item) => {
+        return sum + item.count;
+    }, 0)
+
     return (
         <div className="cart">
             <div className="cart__top">
@@ -28,7 +35,7 @@ function Cart() {
                     </svg>
                     Корзина
                 </h2>
-                <div className="cart__clear">
+                <div className="cart__clear" onClick={onClickClear}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 5H4.16667H17.5" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round"
                               strokeLinejoin="round"/>
@@ -46,15 +53,15 @@ function Cart() {
             </div>
             <div className="content__items">
                 {
-                    cartItems.map(item => (
+                    items.map(item => (
                         <CartItem key={item.id} {...item} />
                     ))
                 }
             </div>
             <div className="cart__bottom">
                 <div className="cart__bottom-details">
-                    <span> Всего пицц: <b>3 шт.</b> </span>
-                    <span> Сумма заказа: <b>900 ₽</b> </span>
+                    <span> Всего пицц: <b>{totalCount}</b> </span>
+                    <span> Сумма заказа: <b>{totalPrice}</b> </span>
                 </div>
                 <div className="cart__bottom-buttons">
                     <a href="/" className="button button--outline button--add go-back-btn">
